@@ -7,7 +7,7 @@ class Packet:
         self.isResponse = isResponse
         self.data = data
     def __str__(self):
-        print("Packet fr:{}\t to:{}\t isRespose:{}\t data:{}".format(self.fr, self.to, self.isResponse, self.data))
+        print("Packet fr:{}\t to:{}\t isRespose:{}".format(self.fr, self.to, self.isResponse))
         return ">>> "+self.data
 
 def send_packet(serialized_packet, serverName, serverPort):

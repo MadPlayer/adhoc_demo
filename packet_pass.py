@@ -18,7 +18,7 @@ while True:
     # 1. packet 수신
     connectionSocket, addr = serverSocket.accept()
     serialized_packet = connectionSocket.recv(1024)
-    print("serialized_packet",serialized_packet)
+    # print("serialized_packet",serialized_packet)
     if serialized_packet == b'':
         print("empty packet")
         connectionSocket.close()
@@ -26,7 +26,7 @@ while True:
     
     packet = pickle.loads(serialized_packet)
     if isinstance(packet, Packet):
-        print("pck_rec is a Packet object.")
+        # print("pck_rec is a Packet object.")
         print("{} received packet from {}".format(myserverName, addr))
     else:
         print("pck_rec is not a Packet object.")
@@ -63,6 +63,7 @@ while True:
     
     # 2-3. 응답 packet 수신 완료 (프로세스를 떼야할 것 같음)      AAr
     else: 
-        print("received response packet!")
-        print(packet.data)
+        # print("received response packet!")
+        # print(packet.data)
+        pass
     
