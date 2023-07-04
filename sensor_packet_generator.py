@@ -5,7 +5,7 @@ import pickle
 import serial
 
 frserverName = "192.168.2.2"
-toserverName = '192.168.2.3'
+toserverName = '192.168.1.183'
 toserverPort = 12345
 
 port = serial.Serial("/dev/ttyACM0", "9600")
@@ -27,7 +27,7 @@ while True:
         data_origin = port.readline()
         data = data_origin.decode('utf-8', 'ignore')
         data = data.split(",")
-        time = data[0]
+        sensortime = data[0]
         windspeed = data[1].split(':')[1]
         dust = data[2].split(':')[1]
         co = int(data[3].split(':')[1])
@@ -38,7 +38,9 @@ while True:
         
         #cur.execute("insert into sensor (windspeed, dust, co, temp, humi) values (?,?,?,?,?)", (windspeed, dust, co, temp, humi))
         #con.commit()
-        sentence = str(data_origin)
+        
+        now = time
+        sentence = ','.join([now.strftime('%Y-%m-%d %H:%M:%S')] + data[1:])
         
     except KeyboardInterrupt:
         break 
