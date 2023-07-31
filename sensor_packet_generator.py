@@ -11,7 +11,7 @@ toserverPort = 12345
 port = serial.Serial("/dev/ttyACM0", "9600")
 #con = sqlite3.connect('SensorData_0612.db')
 #cur = con.cursor()
-
+connected = False
 
 
 with socket(AF_INET, SOCK_STREAM) as clientSocket:
@@ -19,13 +19,15 @@ with socket(AF_INET, SOCK_STREAM) as clientSocket:
         # tcp 소켓 객체 (IPv4, TCP소켓)
         # clientSocket = socket(AF_INET, SOCK_STREAM)
         # 서버와 연결
-        try:
-            clientSocket.connect((toserverName,toserverPort))
-            print("server connected")
-        except Exception as e:
-            print(e)
-            time.sleep(1)
-            continue
+        if not connected:
+            try:
+                clientSocket.connect((toserverName,toserverPort))
+                connected = True
+                print("server connected")
+            except Exception as e:
+                print(e)
+                time.sleep(1)
+                continue
 
         # 입력값으로 패킷 생성
         try:
